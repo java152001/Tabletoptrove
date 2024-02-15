@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { Martel_Sans } from "next/font/google";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const martelSans = Martel_Sans({
+  weight: ['400', '700', '900'],
+  variable: '--font-martelSans',
+  subsets: ['latin']
+})
 
 export const metadata: Metadata = {
   title: "Board Game Collection",
@@ -22,7 +27,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={inter.className}>
+      <body className={martelSans.className}>
         <MantineProvider>
           {children}
         </MantineProvider>

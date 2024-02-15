@@ -18,7 +18,48 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #97BC62 !important;
+}
+
+.martel-sans-extralight {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.martel-sans-light {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.martel-sans-regular {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.martel-sans-semibold {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.martel-sans-bold {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.martel-sans-extrabold {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.martel-sans-black {
+  font-family: "Martel Sans", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
 @layer utilities {
@@ -29,8 +70,4 @@ body {
 
 .nowrap {
   flex-wrap: nowrap !important;
-}
-
-html {
-  background: #97BC62;
 }
