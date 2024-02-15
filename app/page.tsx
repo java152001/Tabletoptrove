@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
-import Landing from './components/landingHero/landingHero';
 import { options } from './api/auth/[...nextauth]/options';
 import LandingHero from './components/landingHero/landingHero';
+import InfoPanel from './components/infoPanel/infoPanel';
 
 
 export default async function Home() {
@@ -20,6 +20,7 @@ export default async function Home() {
     return (
         <main>
             <LandingHero email={session?.user?.email ?? ''} />
+            <InfoPanel />
         </main>
     );
 }
