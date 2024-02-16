@@ -1,6 +1,7 @@
 import { Group, UnstyledButton, NavLink } from "@mantine/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDragon, faHatWizard, faDiceD20, faWandSparkles } from '@fortawesome/free-solid-svg-icons';
+import SignOutBtn from "./signOut";
 
 export default function NavBar({ email }: { email: string }) {
 
@@ -40,7 +41,7 @@ export default function NavBar({ email }: { email: string }) {
                     justify="flex-start"
                 >
                     <h1>Welcome {email}</h1>
-                    <UnstyledButton ml='25'>Signout</UnstyledButton>
+                    <SignOutBtn />
                 </Group>
                 <Group
                     justify="flex-end"
