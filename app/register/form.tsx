@@ -1,11 +1,13 @@
 'use client'
 
-import { TextInput, Button, Group, Box, Container, Text } from '@mantine/core';
+import { TextInput, Button, Group, Box, Container, Text, UnstyledButton } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Link from 'next/link';
+import styles from './page.module.css';
+import { useState } from 'react';
 
 export default function Form() {
-    const form = useForm({
+    const signupForm = useForm({
         initialValues: {
             email: '',
             password: '',
@@ -17,13 +19,52 @@ export default function Form() {
         }
     });
 
+    let [formMethod, setFormMethod] = useState('signup');
+
     return (
         <Container bg='var(--mantine-color-blue-light' mt='100' p='25'>
             <Box maw={340} mx='auto'>
-                <Text size='lg' mb='25' ta='center'>Welcome to Board Game Collection!</Text>
-                <form onSubmit={form.onSubmit(async (values) => {
-
-                    console.log(values);
+                <Text size='lg' mb='25' ta='center'>Welcome to Tabletop Trove</Text>
+                <Group
+                    justify='space-between'
+                    classNames={{
+                        root: styles.noGap
+                    }}
+                >
+                    <UnstyledButton
+                        w='49%'
+                        ta='center'
+                        pt='15'
+                        pb='12'
+                        styles={{
+                            root: {
+                                backgroundColor: '#AEF6C7',
+                                borderTopLeftRadius: '25px',
+                                borderTopRightRadius: '25px'
+                            }
+                        }}
+                        onClick={() => { setFormMethod('signup') }}
+                    >
+                        Sign Up
+                    </UnstyledButton>
+                    <UnstyledButton
+                        w='49%'
+                        ta='center'
+                        pt='15'
+                        pb='12'
+                        styles={{
+                            root: {
+                                backgroundColor: '#AEF6C7',
+                                borderTopLeftRadius: '25px',
+                                borderTopRightRadius: '25px'
+                            }
+                        }}
+                        onClick={() => { setFormMethod('login')}}
+                    >
+                        Login
+                    </UnstyledButton>
+                </Group>
+                <form className={styles.signInForm} onSubmit={signupForm.onSubmit(async (values) => {
 
                   const response = await fetch(`/api/auth/register`, {
                       method: 'POST',
@@ -38,21 +79,21 @@ export default function Form() {
                         label='Email'
                         placeholder='your@email.com'
                         type='email'
-                        {...form.getInputProps('email')}
+                        {...signupForm.getInputProps('email')}
                     />
                     <TextInput
                         withAsterisk
                         label='Password'
                         placeholder='password'
                         type='password'
-                        {...form.getInputProps('password')}
+                        {...signupForm.getInputProps('password')}
                     />
                     <TextInput 
                         withAsterisk
                         label='Confirm Password'
                         placeholder='password'
                         type='password'
-                        {...form.getInputProps('confirmPassword')}
+                        {...signupForm.getInputProps('confirmPassword')}
                     />
                     <Group justify='flex-end' mt='md'>
                         <Button type='submit'>Submit</Button>

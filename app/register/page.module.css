@@ -1,0 +1,10 @@
+.signInForm {
+    background-color: #AEF6C7;
+    padding: 30px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.noGap {
+    gap: 0 !important;
+}
