@@ -8,10 +8,12 @@ export default function Form() {
     const form = useForm({
         initialValues: {
             email: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         },
         validate: {
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email')
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            confirmPassword: (value, values) => value !== values.password ? 'Passwords do not match' : null
         }
     });
 
@@ -20,6 +22,9 @@ export default function Form() {
             <Box maw={340} mx='auto'>
                 <Text size='lg' mb='25' ta='center'>Welcome to Board Game Collection!</Text>
                 <form onSubmit={form.onSubmit(async (values) => {
+
+                    console.log(values);
+
                   const response = await fetch(`/api/auth/register`, {
                       method: 'POST',
                       body: JSON.stringify({
@@ -41,6 +46,13 @@ export default function Form() {
                         placeholder='password'
                         type='password'
                         {...form.getInputProps('password')}
+                    />
+                    <TextInput 
+                        withAsterisk
+                        label='Confirm Password'
+                        placeholder='password'
+                        type='password'
+                        {...form.getInputProps('confirmPassword')}
                     />
                     <Group justify='flex-end' mt='md'>
                         <Button type='submit'>Submit</Button>
