@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import { options } from './api/auth/[...nextauth]/options';
 import LandingHero from './components/landingHero/landingHero';
 import InfoPanel from './components/infoPanel/infoPanel';
-
+import NavBar from './components/navBar/navBar';
 
 export default async function Home() {
 
@@ -19,6 +19,7 @@ export default async function Home() {
 
     return (
         <main>
+            <NavBar email={session?.user?.email ?? ''}/>
             <LandingHero email={session?.user?.email ?? ''} />
             <InfoPanel />
         </main>
