@@ -14,6 +14,6 @@ export default async function RegisterPage({
     // };
 
     return (
-        <Form />
+        <Form method={searchParams.method}/>
     )
 }

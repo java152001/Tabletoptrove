@@ -43,6 +43,9 @@ export const options: NextAuthOptions = {
             }
         })
     ],
+    pages: {
+        signIn: "/register?method=signin"
+    },
     callbacks: {
         async jwt({token, user}) {
 
