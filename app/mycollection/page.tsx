@@ -1,41 +1,23 @@
-import { client } from '../utils/configSanity'
-import Link from 'next/link';
 import { Table, TableThead, TableTr, TableTh, TableTd, TableTbody } from '@mantine/core';
+import { options } from '../api/auth/[...nextauth]/options';
+import { getServerSession } from 'next-auth';
+import { client } from '../utils/configSanity';
+import DataTable from './datatable';
 
-interface ICollection {
-    _id: string;
-    name: string;
-    minPlayers: number,
-    maxPlayers: number,
-    playTime: number,
-    minAge: number
-}
+export const revalidate = 0;
 
-async function getCollection() {
-    const query = '*[_type == "collection"]{_id, name, minPlayers, maxPlayers, playTime, minAge}';
-
-    const data = await client.fetch(query);
-
-    return data as ICollection[];
+type NewSession = {
+    user: {
+        email: string | null | undefined;
+        id: number | null | undefined;
+        name: string | null | undefined;
+        image: string | null | undefined;
+    }
 }
 
 export default async function MyCollection() {
 
-    const data = (await getCollection()) as ICollection[];
-
-    const rows = data.map((ele) => {
-
-        const { _id, name, playTime, minAge, minPlayers, maxPlayers } = ele;
-        return (
-            <TableTr key={_id}>
-                <TableTd><Link href={`/games/${_id}`}>{name}</Link></TableTd>
-                <TableTd>{playTime}</TableTd>
-                <TableTd>{minAge}</TableTd>
-                <TableTd>{minPlayers}</TableTd>
-                <TableTd>{maxPlayers}</TableTd>
-            </TableTr>
-        )
-    })
+    const session = await getServerSession(options) as NewSession;
 
     return (
         <Table>
@@ -48,9 +30,7 @@ export default async function MyCollection() {
                     <TableTh>Maximum Players</TableTh>
                 </TableTr>
             </TableThead>
-            <TableTbody>
-                {rows}
-            </TableTbody>
+            {session && <DataTable id={session.user.id} />}
         </Table>
     )
 

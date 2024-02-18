@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from 'axios';
+import { revalidatePath } from "next/cache";
 require('dotenv').config();
 
 export async function POST(req: Request) {
@@ -33,7 +34,7 @@ export async function POST(req: Request) {
             Authorization: `Bearer ${process.env.SANITY_API_KEY}`
         },
         data: { mutations }
-    })
+    }).then(data => revalidatePath('/mycollection', 'page'));
 
     return NextResponse.json({ message: 'Game added to collection' });
 }

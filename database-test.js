@@ -6,7 +6,7 @@ async function setup() {
         filename: './mydb.sqlite',
         driver: sqlite3.Database
     });
-    await db.migrate({force: 'last'});
+    await db.migrate();
 
     const users = await db.all('SELECT * FROM users');
     console.log(users);
