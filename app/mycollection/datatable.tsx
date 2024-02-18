@@ -17,8 +17,40 @@ export default function DataTable({ id }: { id: number | null | undefined }) {
             .then(data => setGameData(data))
     }, [])
 
+    const filterList = (filterType: string) => {
+        const gdCopy = [...gameData.data]
+
+        switch (filterType) {
+
+            case 'name':
+                gdCopy.sort((a, b) => a.name.localeCompare(b.name));
+                setGameData({ data: gdCopy });
+            break;
+
+            case 'playTime':
+                gdCopy.sort((a, b) => a.playTime - b.playTime);
+                setGameData({ data: gdCopy});
+            break;
+
+            case 'minAge':
+                gdCopy.sort((a, b) => a.minAge - b.minAge);
+                setGameData({ data: gdCopy});
+            break;
+
+            case 'minPlayers':
+                gdCopy.sort((a, b) => a.minPlayers - b.minPlayers);
+                setGameData({ data: gdCopy});
+            break;
+
+            case 'maxPlayers':
+                gdCopy.sort((a, b) => a.maxPlayers - b.maxPlayers);
+                setGameData({ data: gdCopy});
+            break;
+        }
+    }
+
     const rows = gameData.data.map((ele => {
-        const { _id, image, name, playTime, minAge, minPlayers, maxPlayers } = ele;
+        const { _id, name, playTime, minAge, minPlayers, maxPlayers } = ele;
 
         let fontSize: string = '14px'
 
@@ -100,11 +132,11 @@ export default function DataTable({ id }: { id: number | null | undefined }) {
                 <Table>
                     <TableThead>
                         <TableTr>
-                            <TableTh>Game Name</TableTh>
-                            <TableTh>Play Time</TableTh>
-                            <TableTh>Minimum Age</TableTh>
-                            <TableTh>Minimum Players</TableTh>
-                            <TableTh>Maximum Players</TableTh>
+                            <TableTh onClick={() => filterList('name')}>Game Name</TableTh>
+                            <TableTh onClick={() => filterList('playTime')}>Play Time</TableTh>
+                            <TableTh onClick={() => filterList('minAge')}>Minimum Age</TableTh>
+                            <TableTh onClick={() => filterList('minPlayers')}>Minimum Players</TableTh>
+                            <TableTh onClick={() => filterList('maxPlayers')}>Maximum Players</TableTh>
                             <TableTh>Remove?</TableTh>
                         </TableTr>
                     </TableThead>
